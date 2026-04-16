@@ -133,36 +133,36 @@ function App() {
   };
 
   const generateAgentReport = (rev, prods, trnd, regs) => {
-    let report = `Based on the latest data analysis, the total revenue generated is $${rev.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}. `;
+    let report = `최신 데이터 분석 결과, 총 발생 매출은 $${rev.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}입니다. `;
     
     if (prods.length > 0) {
-      report += `Our stellar performer is the **${prods[0].name}**, driving $${prods[0].revenue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} in sales. `;
+      report += `가장 높은 판매고를 기록한 효자 상품은 **${prods[0].name}**이며, 단독으로 $${prods[0].revenue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}의 매출을 견인했습니다. `;
     }
 
     if (trnd.length > 1) {
       const firstMonth = trnd[0].revenue;
       const lastMonth = trnd[trnd.length - 1].revenue;
       if (lastMonth > firstMonth) {
-        report += `Sales show a positive upward trend comparing the start and end of the period. `;
+        report += `전체 기간의 시작과 끝을 비교해 보았을 때 긍정적인 우상향 매출 추세를 보이고 있습니다. `;
       } else {
-        report += `There was a noticeable dip in revenue towards the end of the period. `;
+        report += `해당 기간의 후반부로 갈수록 매출이 눈에 띄게 감소했습니다. `;
       }
     }
 
     if (regs.length > 0) {
       const topReg = [...regs].sort((a, b) => b.value - a.value)[0];
-      report += `Regionally, the **${topReg.name}** sector is dominating the market share. `;
+      report += `지역별로는 **${topReg.name}** 지역이 시장을 압도적으로 선도하고 있습니다. `;
     }
 
-    report += `I recommend focusing on the top-selling items to maximize future growth and reviewing underperforming regions.`;
+    report += `향후 성장을 극대화하기 위해 판매율 1위 제품의 마케팅에 더욱 집중하고, 실적이 저조한 지역의 원인 분석 및 재검토를 권장합니다.`;
     setAgentReport(report);
   };
 
   return (
     <div className="container animate-fade-in">
       <header className="header">
-        <h1 className="text-gradient">Agentic Sales Dashboard</h1>
-        <p className="text-muted">Upload your Excel data for instant AI-driven analytics.</p>
+        <h1 className="text-gradient">AI 영업 대시보드</h1>
+        <p className="text-muted">엑셀 데이터를 업로드하면 즉시 AI 분석 결과를 보여줍니다.</p>
       </header>
 
       {!data ? (
@@ -174,8 +174,8 @@ function App() {
           onDrop={handleDrop}
         >
           <Upload size={48} className="upload-icon" />
-          <h3 style={{ marginBottom: "1rem" }}>Drag and drop your Excel file here</h3>
-          <p className="text-muted" style={{ marginBottom: "2rem" }}>or click to browse from your computer</p>
+          <h3 style={{ marginBottom: "1rem" }}>여기로 엑셀 파일을 드래그 앤 드롭하세요</h3>
+          <p className="text-muted" style={{ marginBottom: "2rem" }}>또는 클릭하여 내 컴퓨터에서 파일 찾기</p>
           <input 
             ref={fileInputRef} 
             type="file" 
@@ -183,7 +183,7 @@ function App() {
             accept=".xlsx, .xls, .csv" 
             onChange={handleChange} 
           />
-          <button className="btn btn-primary" onClick={onButtonClick}>Select File</button>
+          <button className="btn btn-primary" onClick={onButtonClick}>파일 선택</button>
         </div>
       ) : (
         <div className="dashboard-grid">
@@ -191,31 +191,31 @@ function App() {
           <div className="glass-panel stat-card agent-report animate-fade-in" style={{ animationDelay: '0.1s' }}>
             <div className="agent-header">
               <Bot size={28} />
-              <h2>Agent Insights</h2>
+              <h2>AI 분석 리포트</h2>
             </div>
             <p className="agent-text" dangerouslySetInnerHTML={{__html: agentReport.replace(/\*\*(.*?)\*\*/g, '<strong><span class="text-gradient">$1</span></strong>') }}></p>
           </div>
 
           {/* Stat Cards */}
           <div className="glass-panel stat-card animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <div className="stat-title">Total Revenue</div>
+            <div className="stat-title">총 매출</div>
             <div className="stat-value text-gradient">${totalRevenue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
           </div>
           
           <div className="glass-panel stat-card animate-fade-in" style={{ animationDelay: '0.3s' }}>
-            <div className="stat-title">Total Items Sold</div>
-            <div className="stat-value text-gradient">{totalItems.toLocaleString()}</div>
+            <div className="stat-title">총 판매 수량</div>
+            <div className="stat-value text-gradient">{totalItems.toLocaleString()}개</div>
           </div>
 
           <div className="glass-panel stat-card animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <div className="stat-title">Top Product</div>
+            <div className="stat-title">최고 매출 제품</div>
             <div className="stat-value text-gradient" style={{ fontSize: '2rem' }}>{topProduct.name}</div>
             <div className="stat-title" style={{ marginTop: '0.5rem' }}>${topProduct.revenue.toLocaleString()}</div>
           </div>
 
           {/* Charts */}
           <div className="glass-panel chart-card animate-fade-in" style={{ animationDelay: '0.5s' }}>
-            <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><TrendingUp size={20} className="text-muted"/> Monthly Revenue Trend</h3>
+            <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><TrendingUp size={20} className="text-muted"/> 월별 매출 추이</h3>
             <div className="chart-container">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={monthlyTrends}>
@@ -239,7 +239,7 @@ function App() {
           </div>
 
           <div className="glass-panel chart-card animate-fade-in" style={{ animationDelay: '0.6s' }}>
-            <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><BarChart2 size={20} className="text-muted"/> Revenue by Product</h3>
+            <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><BarChart2 size={20} className="text-muted"/> 제품별 매출</h3>
             <div className="chart-container">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={productStats} layout="vertical" margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
@@ -260,7 +260,7 @@ function App() {
           </div>
           
           <div style={{gridColumn: 'span 12', textAlign: 'center', marginTop: '2rem'}}>
-             <button className="btn btn-primary" onClick={() => setData(null)}>Upload New Data</button>
+             <button className="btn btn-primary" onClick={() => setData(null)}>새 데이터 업로드</button>
           </div>
 
         </div>
