@@ -20,7 +20,6 @@ function App() {
   const [topProduct, setTopProduct] = useState({ name: '', revenue: 0 });
   const [productStats, setProductStats] = useState([]);
   const [monthlyTrends, setMonthlyTrends] = useState([]);
-  const [regionStats, setRegionStats] = useState([]);
   const [agentReport, setAgentReport] = useState('');
 
   const handleDrag = function(e) {
@@ -127,7 +126,6 @@ function App() {
     setMonthlyTrends(trends);
 
     const regions = Object.keys(regionMap).map(k => ({ name: k, value: regionMap[k] }));
-    setRegionStats(regions);
 
     // Agent Report heuristics
     generateAgentReport(revenue, products, trends, regions);

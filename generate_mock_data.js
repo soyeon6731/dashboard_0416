@@ -1,6 +1,4 @@
 import * as XLSX from 'xlsx';
-import fs from 'fs';
-
 const generateMockData = () => {
   const data = [];
   const products = ['Smartphone X', 'Laptop Pro', 'Wireless Earbuds', 'Smartwatch Series 5', '4K Monitor', 'Gaming Mouse'];
